@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Switch(props) {
-  let switchStyle = "switch switch-" + (props.status ? "on" : null);
+  let [switchStatus, setSwitchStatus] = useState(false);
+
+  function switchClick() {
+    setSwitchStatus(status => !status);
+    props.handleClick(!switchStatus);
+  }
+
   return (
-    <div>
-      <div className={switchStyle} onClick={props.handleClick}>
-        {props.status === true ? "ON" : "OFF"}
+    <div className="switch-container">
+      <div
+        className={switchStatus === false ? "switch" : "switch switch-on"}
+        onClick={switchClick}
+      >
+        {switchStatus === false ? "Off" : "On"}
       </div>
     </div>
   );
